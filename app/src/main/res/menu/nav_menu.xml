@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_testStat"
+            android:icon="@drawable/ic_baseline_notes_24"
+            android:title="Статистика тестирований" />
+        <item
+            android:id="@+id/nav_participiants"
+            android:icon="@drawable/ic_baseline_notes_24"
+            android:title="Список участников" />
+        <item
+            android:id="@+id/nav_teachers"
+            android:icon="@drawable/ic_baseline_notes_24"
+            android:title="Список учителей" />
+        <item
+            android:id="@+id/nav_test"
+            android:icon="@drawable/ic_baseline_notes_24"
+            android:title="Тестирование" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="Настройки" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile_24"
+            android:title="Профиль" />
+        <item
+            android:id="@+id/nav_report"
+            android:icon="@drawable/ic_baseline_report_problem_24"
+            android:title="Сообщить о проблеме" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_baseline_exit_to_app_24"
+            android:title="Выход" />
+    </group>
+
+</menu>
