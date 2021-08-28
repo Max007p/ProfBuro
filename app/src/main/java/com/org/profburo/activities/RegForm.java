@@ -21,6 +21,7 @@ import com.org.profburo.network.responsesEntities.login.LoginResponse;
 import com.org.profburo.network.responsesEntities.region.RegionResponse;
 import com.org.profburo.network.responsesEntities.registration.RegisterBody;
 import com.org.profburo.network.responsesEntities.school.SchoolResponse;
+import com.org.profburo.others.PermissionCode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -114,6 +115,7 @@ public class RegForm extends AppCompatActivity {
         List<String> region = new ArrayList<>();
         region.add("Ленинградская область");
         ArrayAdapter<String> regionAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdownlist, region);
+        regionAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         regionSpinner.setAdapter(regionAdapter);
         //-------------------------------------------------
         List<Integer> classes = new ArrayList<Integer>();
@@ -123,6 +125,7 @@ public class RegForm extends AppCompatActivity {
         classes.add(10);
         classes.add(11);
         ArrayAdapter<Integer> classAdapter = new ArrayAdapter<Integer>(getApplicationContext(), R.layout.spinner_dropdownlist, classes);
+        classAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         classSpinner.setAdapter(classAdapter);
         //-------------------------------------------------
         List<String> literas = new ArrayList<String>();
@@ -132,6 +135,7 @@ public class RegForm extends AppCompatActivity {
         literas.add("Г");
         literas.add("Д");
         ArrayAdapter<String> literaAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdownlist, literas);
+        literaAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         literaSpinner.setAdapter(literaAdapter);
         //-------------------------------------------------
         loadRegionSpinner();
@@ -140,6 +144,7 @@ public class RegForm extends AppCompatActivity {
         sexes.add("мужчина");
         sexes.add("женщина");
         ArrayAdapter<String> sexAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdownlist, sexes);
+        sexAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         genderSpinner.setAdapter(sexAdapter);
     }
 
@@ -161,6 +166,7 @@ public class RegForm extends AppCompatActivity {
                                 regionBind.put(response.body().get(i).getName(), response.body().get(i).getId());
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdownlist, regionsDistricts);
+                            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
                             regionDistrictSpinner.setAdapter(adapter);
                         }
                     }
@@ -201,6 +207,7 @@ public class RegForm extends AppCompatActivity {
                                 schools.add(response.body().get(i).getName());
                             }
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_dropdownlist, schools);
+                            adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
                             schoolNameSpinner.setAdapter(adapter);
                         }
                     }
@@ -261,54 +268,97 @@ public class RegForm extends AppCompatActivity {
         String passwordFieldVar = passwordField.getText().toString();
 
         Integer birthDay = datePicker.getDayOfMonth();
-        Integer birthMonth = datePicker.getMonth();
+        Integer birthMonth = datePicker.getMonth() + 1;
         Integer birthYear = datePicker.getYear();
         String birthDate = birthYear.toString() + "-" + birthMonth.toString() + "-" + birthDay.toString();
 
         String gradeVar = classSpinnerVar + " " + literaSpinnerVar;
 
-        RestApi.getInstance()
-                .getApi()
-                .registerUser(new RegisterBody(
-                        lastnameFieldVar,
-                        nameFieldVar,
-                        patronymicFieldVar,
-                        birthDate,
-                        regionDistrictSpinnerVar,
-                        schoolNameSpinnerVar,
-                        gradeVar,
-                        serialPassportFieldVar,
-                        numberPassportFieldVar,
-                        genderSpinnerVar,
-                        emailFieldVar,
-                        phoneFieldVar,
-                        passwordFieldVar,
-                        authorisedUser.getPermission()))
-                .enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (response.isSuccessful())
-                        {
-                            if (response.body().getStatus().equals("succeed"))
+        if (authorisedUser.getPermission().equals(PermissionCode.MATURE))
+        {
+            RestApi.getInstance()
+                    .getApi()
+                    .registerUser(new RegisterBody(
+                            lastnameFieldVar,
+                            nameFieldVar,
+                            patronymicFieldVar,
+                            birthDate,
+                            regionDistrictSpinnerVar,
+                            serialPassportFieldVar,
+                            numberPassportFieldVar,
+                            genderSpinnerVar,
+                            emailFieldVar,
+                            phoneFieldVar,
+                            passwordFieldVar,
+                            authorisedUser.getPermission()))
+                    .enqueue(new Callback<LoginResponse>() {
+                        @Override
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            if (response.isSuccessful())
                             {
-                                authorisedUser = new User(response.body());
-                                Intent toLogPage = new Intent(RegForm.this, MainPage.class);
-                                startActivity(toLogPage);
-                            }
-                            else
-                            {
-                                Toast.makeText(RegForm.this, "Такой пользователь уже существует", Toast.LENGTH_SHORT).show();
+                                if (response.body().getStatus().equals("succeed"))
+                                {
+                                    authorisedUser = new User(response.body());
+                                    Intent toLogPage = new Intent(RegForm.this, MainPage.class);
+                                    startActivity(toLogPage);
+                                }
+                                else
+                                {
+                                    Toast.makeText(RegForm.this, "Такой пользователь уже существует", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+        }
+        else
+        {
+            RestApi.getInstance()
+                    .getApi()
+                    .registerUser(new RegisterBody(
+                            lastnameFieldVar,
+                            nameFieldVar,
+                            patronymicFieldVar,
+                            birthDate,
+                            regionDistrictSpinnerVar,
+                            schoolNameSpinnerVar,
+                            gradeVar,
+                            serialPassportFieldVar,
+                            numberPassportFieldVar,
+                            genderSpinnerVar,
+                            emailFieldVar,
+                            phoneFieldVar,
+                            passwordFieldVar,
+                            authorisedUser.getPermission()))
+                    .enqueue(new Callback<LoginResponse>() {
+                        @Override
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            if (response.isSuccessful())
+                            {
+                                if (response.body().getStatus().equals("succeed"))
+                                {
+                                    authorisedUser = new User(response.body());
+                                    Intent toLogPage = new Intent(RegForm.this, MainPage.class);
+                                    startActivity(toLogPage);
+                                    finishAfterTransition();
+                                }
+                                else
+                                {
+                                    Toast.makeText(RegForm.this, "Такой пользователь уже существует", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
 
+                        @Override
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
 
+                        }
+                    });
+        }
     }
 
     private boolean isChecked()
@@ -316,11 +366,6 @@ public class RegForm extends AppCompatActivity {
         if (lastnameField.getText().length() == 0 ||
             nameField.getText().length() == 0 ||
             patronymicField.getText().length() == 0 ||
-            regionSpinner.getSelectedItem().toString().length() == 0 ||
-            regionDistrictSpinner.getSelectedItem().toString().length() == 0 ||
-            schoolNameSpinner.getSelectedItem().toString().length() == 0 ||
-            classSpinner.getSelectedItem().toString().length() == 0 ||
-            literaSpinner.getSelectedItem().toString().length() == 0 ||
             serialPassportField.getText().length() == 0 ||
             numberPassportField.getText().length() == 0 ||
             genderSpinner.getSelectedItem().toString().length() == 0 ||

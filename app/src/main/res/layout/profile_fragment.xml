@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/profile_background_4k_1fps">
+    android:background="@drawable/profile_background_4k_1fps"
+    android:id="@+id/profile_main">
 
         <FrameLayout
             android:id="@+id/logo"
@@ -23,16 +24,6 @@
                 android:contentDescription="to navbar"
                 android:layout_gravity="start|center"
                 android:layout_marginStart="20dp"/>
-
-            <ImageView
-                android:id="@+id/toSupportPage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_baseline_contact_support_24"
-                android:contentDescription="to navbar"
-                android:layout_gravity="end|center"
-                android:layout_marginEnd="20dp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

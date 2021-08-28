@@ -20,10 +20,13 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.org.profburo.R;
 import com.org.profburo.entities.User;
+import com.org.profburo.fragments.ParticipiantsFragment;
 import com.org.profburo.fragments.ProfileFragment;
 import com.org.profburo.fragments.ReportFragment;
 import com.org.profburo.fragments.SettingsFragment;
+import com.org.profburo.fragments.TeacherFragment;
 import com.org.profburo.fragments.TestsChoiceFragment;
+import com.org.profburo.fragments.TestsStatisticFragment;
 import com.org.profburo.network.RestApi;
 import com.org.profburo.others.UtilitaryVariables;
 
@@ -43,6 +46,9 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     private TestsChoiceFragment selectedTestChoiceFragment;
     private ReportFragment selectedReportFragment;
     private SettingsFragment selectedSettingsFragment;
+    private TeacherFragment selectedTeacherFragment;
+    private ParticipiantsFragment selectedParticipiantsFragment;
+    private TestsStatisticFragment selectedTestsStatisticFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,17 +72,22 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             case "mature":
 
             case "student":
-                selectedProfileFragment = new ProfileFragment(drawer);
+                selectedProfileFragment = new ProfileFragment(navigationView, drawer);
                 fragmentTransaction.replace(R.id.frame, selectedProfileFragment);
-                fragmentTransaction.commit();
                 break;
 
             case "teacher":
+                selectedParticipiantsFragment = new ParticipiantsFragment(drawer);
+                fragmentTransaction.replace(R.id.frame, selectedParticipiantsFragment);
                 break;
 
             case "worker":
+                selectedTeacherFragment = new TeacherFragment(drawer);
+                fragmentTransaction.replace(R.id.frame, selectedTeacherFragment);
                 break;
         }
+
+        fragmentTransaction.commit();
 
     }
 
@@ -95,12 +106,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 navigationView.getMenu().getItem(2).setVisible(false);
                 break;
             case "teacher":
-                navigationView.getMenu().getItem(1).setVisible(false);
-                navigationView.getMenu().getItem(2).setVisible(false);
                 navigationView.getMenu().getItem(3).setVisible(false);
+                navigationView.getMenu().getItem(2).setVisible(false);
+                navigationView.getMenu().getItem(5).setVisible(false);
                 break;
             case "worker":
                 navigationView.getMenu().getItem(3).setVisible(false);
+                navigationView.getMenu().getItem(6).setVisible(false);
                 break;
         }
     }
@@ -111,44 +123,44 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
         switch (item.getItemId()) {
             case R.id.nav_testStat:
-
+                selectedTestsStatisticFragment = new TestsStatisticFragment(drawer);
+                fragmentTransaction.replace(R.id.frame, selectedTestsStatisticFragment);
                 break;
 
             case R.id.nav_participiants:
-
+                selectedParticipiantsFragment = new ParticipiantsFragment(drawer);
+                fragmentTransaction.replace(R.id.frame, selectedParticipiantsFragment);
                 break;
 
             case R.id.nav_teachers:
-
+                selectedTeacherFragment = new TeacherFragment(drawer);
+                fragmentTransaction.replace(R.id.frame, selectedTeacherFragment);
                 break;
 
             case R.id.nav_test:
                 selectedTestChoiceFragment = new TestsChoiceFragment(drawer);
                 fragmentTransaction.replace(R.id.frame, selectedTestChoiceFragment);
-                fragmentTransaction.addToBackStack("tests");
                 break;
 
             case R.id.nav_settings:
                 selectedSettingsFragment = new SettingsFragment(drawer);
                 fragmentTransaction.replace(R.id.frame, selectedSettingsFragment);
-                fragmentTransaction.addToBackStack("settings");
                 break;
 
             case R.id.nav_profile:
-                selectedProfileFragment = new ProfileFragment(drawer);
+                selectedProfileFragment = new ProfileFragment(navigationView, drawer);
                 fragmentTransaction.replace(R.id.frame, selectedProfileFragment);
-                fragmentTransaction.addToBackStack("profile");
                 break;
 
             case R.id.nav_report:
                 selectedReportFragment = new ReportFragment(drawer);
                 fragmentTransaction.replace(R.id.frame, selectedReportFragment);
-                fragmentTransaction.addToBackStack("report");
                 break;
 
             case R.id.nav_logout:
                 Intent logout = new Intent(MainPage.this, LoginForm.class);
                 startActivity(logout);
+                finishAfterTransition();
                 break;
         }
 

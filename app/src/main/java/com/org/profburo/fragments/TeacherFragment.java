@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.org.profburo.R;
-import com.org.profburo.adapters.TestDescriptionAdapter;
+import com.org.profburo.adapters.TeachersDescriptionAdapter;
 import com.org.profburo.network.RestApi;
-import com.org.profburo.network.responsesEntities.test.TestsResponse;
+import com.org.profburo.network.responsesEntities.teachers.TeacherResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,26 +25,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.org.profburo.others.UtilitaryVariables.authorisedUser;
+public class TeacherFragment extends Fragment {
 
-public class TestsChoiceFragment extends Fragment {
-
+    private DrawerLayout drawer;
     private RecyclerView recyclerView;
     private ImageView toNav;
-    private DrawerLayout drawer;
-    private List<TestsResponse> tests;
+    private List<TeacherResponse> teachers;
 
-    public TestsChoiceFragment(DrawerLayout drawer) {
+    public TeacherFragment(DrawerLayout drawer) {
         this.drawer = drawer;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.test_choice_fragment, container, false);
+        return inflater.inflate(R.layout.teachers_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         initClickable(view);
         recyclerSettingUp(view);
@@ -53,27 +52,26 @@ public class TestsChoiceFragment extends Fragment {
 
     private void recyclerSettingUp(View view)
     {
-        recyclerView = (RecyclerView) view.findViewById(R.id.testsList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.teachers_list);
         RestApi.getInstance()
                 .getApi()
-                .getTestsList(authorisedUser.getId())
-                .enqueue(new Callback<List<TestsResponse>>() {
+                .getTeachers()
+                .enqueue(new Callback<List<TeacherResponse>>() {
                     @Override
-                    public void onResponse(Call<List<TestsResponse>> call, Response<List<TestsResponse>> response) {
+                    public void onResponse(Call<List<TeacherResponse>> call, Response<List<TeacherResponse>> response) {
                         if (response.isSuccessful())
                         {
-                            tests = new ArrayList<>(response.body());
-                            TestDescriptionAdapter adapter = new TestDescriptionAdapter(tests);
+                            teachers = new ArrayList<>(response.body());
+                            TeachersDescriptionAdapter adapter = new TeachersDescriptionAdapter(teachers);
                             recyclerView.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<TestsResponse>> call, Throwable t) {
+                    public void onFailure(Call<List<TeacherResponse>> call, Throwable t) {
 
                     }
                 });
-
     }
 
     private void initClickable(View view)

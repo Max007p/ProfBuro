@@ -64,6 +64,9 @@ public class LoginForm extends AppCompatActivity {
             public void onClick(View v) {
                 if (login.getText().length() == 0 || password.getText().length() == 0)
                 {
+                    Intent toLogPage = new Intent(LoginForm.this, MainPage.class);
+                    startActivity(toLogPage);
+                    finishAfterTransition();
                     Toast.makeText(LoginForm.this, "Введите данные в пустые поля", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -92,10 +95,11 @@ public class LoginForm extends AppCompatActivity {
                                 authorisedUser = new User(response.body());
                                 Intent toLogPage = new Intent(LoginForm.this, MainPage.class);
                                 startActivity(toLogPage);
+                                finishAfterTransition();
                             }
                             else
                             {
-                                Toast.makeText(LoginForm.this, "Такого пользователя в системе не найдено", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginForm.this, "Неверный логин или пароль", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

@@ -14,9 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.org.profburo.R;
-import com.org.profburo.adapters.TestDescriptionAdapter;
+import com.org.profburo.adapters.TeachersDescriptionAdapter;
+import com.org.profburo.adapters.TestStatisticAdapter;
 import com.org.profburo.network.RestApi;
-import com.org.profburo.network.responsesEntities.test.TestsResponse;
+import com.org.profburo.network.responsesEntities.teachers.TeacherResponse;
+import com.org.profburo.network.responsesEntities.test.TestStatistic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,55 +27,54 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.org.profburo.others.UtilitaryVariables.authorisedUser;
+public class TestsStatisticFragment extends Fragment {
 
-public class TestsChoiceFragment extends Fragment {
-
+    private DrawerLayout drawer;
     private RecyclerView recyclerView;
     private ImageView toNav;
-    private DrawerLayout drawer;
-    private List<TestsResponse> tests;
+    private List<TestStatistic> tests;
 
-    public TestsChoiceFragment(DrawerLayout drawer) {
+    public TestsStatisticFragment(DrawerLayout drawer) {
         this.drawer = drawer;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.test_choice_fragment, container, false);
+        return inflater.inflate(R.layout.tests_statistic_fragment, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         initClickable(view);
         recyclerSettingUp(view);
+
 
     }
 
     private void recyclerSettingUp(View view)
     {
-        recyclerView = (RecyclerView) view.findViewById(R.id.testsList);
+        recyclerView = (RecyclerView) view.findViewById(R.id.stats_list);
         RestApi.getInstance()
                 .getApi()
-                .getTestsList(authorisedUser.getId())
-                .enqueue(new Callback<List<TestsResponse>>() {
+                .getTestStatistic()
+                .enqueue(new Callback<List<TestStatistic>>() {
                     @Override
-                    public void onResponse(Call<List<TestsResponse>> call, Response<List<TestsResponse>> response) {
+                    public void onResponse(Call<List<TestStatistic>> call, Response<List<TestStatistic>> response) {
                         if (response.isSuccessful())
                         {
                             tests = new ArrayList<>(response.body());
-                            TestDescriptionAdapter adapter = new TestDescriptionAdapter(tests);
+                            TestStatisticAdapter adapter = new TestStatisticAdapter(tests);
                             recyclerView.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<TestsResponse>> call, Throwable t) {
+                    public void onFailure(Call<List<TestStatistic>> call, Throwable t) {
 
                     }
                 });
-
     }
 
     private void initClickable(View view)

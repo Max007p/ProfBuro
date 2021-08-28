@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue_dialog_background"
@@ -54,10 +55,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:ems="15"
+        android:ems="10"
+        android:gravity="start|top"
         android:inputType="textMultiLine"
         android:background="@drawable/blue_soft_dialog_shape"
-        android:backgroundTint="@color/white"/>
+        android:backgroundTint="@color/white"
+        android:textColor="@color/black"
+        android:fontFamily="@font/rubik_regular"/>
 
     <RatingBar
         android:id="@+id/ratingBar"
@@ -66,7 +70,8 @@
         app:layout_constraintStart_toStartOf="@id/reportText"
         app:layout_constraintEnd_toEndOf="@id/reportText"
         app:layout_constraintTop_toBottomOf="@id/reportText"
-        android:progressTint="@color/yellow" />
+        android:progressTint="@color/yellow"
+        style="@android:style/Widget.Holo.RatingBar" />
 
     <Button
         android:id="@+id/sendReport"

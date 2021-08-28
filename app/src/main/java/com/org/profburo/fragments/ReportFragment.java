@@ -55,7 +55,7 @@ public class ReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast message = new Toast(getContext());
-                message.setText("Report has sent");
+                message.setText("Спасибо за отзыв!");
                 message.setDuration(Toast.LENGTH_LONG);
                 message.show();
             }

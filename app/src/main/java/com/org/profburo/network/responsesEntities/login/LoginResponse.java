@@ -3,9 +3,9 @@ package com.org.profburo.network.responsesEntities.login;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+import java.sql.Date;
 
-    //Эту сущность используется и в получении ответного json при регистрации
+public class LoginResponse {
 
     @SerializedName("number_passport")
     @Expose
@@ -22,6 +22,12 @@ public class LoginResponse {
     @SerializedName("last_name")
     @Expose
     private String lastName;
+    @SerializedName("middlename")
+    @Expose
+    private String middleName;
+    @SerializedName("birthday")
+    @Expose
+    private String birthday;
     @SerializedName("permission")
     @Expose
     private String permission;
@@ -46,6 +52,35 @@ public class LoginResponse {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
 
     public String getNumberPassport() {
         return numberPassport;

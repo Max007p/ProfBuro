@@ -24,6 +24,7 @@
         <activity android:name=".activities.RegForm"/>
         <activity android:name=".activities.MainPage"/>
         <activity android:name=".activities.TestForm"/>
+        <activity android:name=".activities.TestResultPage"/>
     </application>
 
 </manifest>

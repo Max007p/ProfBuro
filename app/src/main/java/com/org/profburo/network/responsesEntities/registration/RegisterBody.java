@@ -33,6 +33,21 @@ public class RegisterBody {
         this.permission = permission;
     }
 
+    public RegisterBody(String secondName, String name, String patronymic, String birthDate, String region, String serialPassport, String numberPassport, String gender, String email, String phone, String password, String permission) {
+        this.secondName = secondName;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.birthDate = birthDate;
+        this.region = region;
+        this.serialPassport = serialPassport;
+        this.numberPassport = numberPassport;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.permission = permission;
+    }
+
     public String getPermission() {
         return permission;
     }

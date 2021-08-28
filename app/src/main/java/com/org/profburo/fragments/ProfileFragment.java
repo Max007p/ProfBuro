@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.navigation.NavigationView;
 import com.org.profburo.R;
 import com.org.profburo.network.RestApi;
 import com.org.profburo.network.responsesEntities.test.HasAnyCompletedTest;
@@ -30,9 +32,16 @@ public class ProfileFragment extends Fragment {
     private Button startTest;
     private Button seeResults;
     private DrawerLayout drawer;
+    private NavigationView navigationView;
 
     public ProfileFragment(DrawerLayout drawer) {
         this.drawer = drawer;
+    }
+
+    public ProfileFragment(NavigationView navigationView, DrawerLayout drawer)
+    {
+        this.drawer = drawer;
+        this.navigationView = navigationView;
     }
 
     @Override
@@ -64,10 +73,13 @@ public class ProfileFragment extends Fragment {
         startTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast message = new Toast(getContext());
-                message.setText("Test has started");
-                message.setDuration(Toast.LENGTH_LONG);
-                message.show();
+                startTest.setVisibility(View.GONE);
+                seeResults.setVisibility(View.GONE);
+                TestsChoiceFragment selectedTestChoiceFragment = new TestsChoiceFragment(drawer);
+                FragmentTransaction trans = getFragmentManager().beginTransaction();
+                trans.replace(R.id.profile_main, selectedTestChoiceFragment);
+                navigationView.setCheckedItem(R.id.nav_test);
+                trans.commit();
             }
         });
 
@@ -99,7 +111,13 @@ public class ProfileFragment extends Fragment {
                                 seeResults.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        Toast.makeText(getContext(), "Осуществляется переход к списку результатов теста", Toast.LENGTH_SHORT).show();
+                                        startTest.setVisibility(View.GONE);
+                                        seeResults.setVisibility(View.GONE);
+                                        TestsChoiceFragment selectedTestChoiceFragment = new TestsChoiceFragment(drawer);
+                                        FragmentTransaction trans = getFragmentManager().beginTransaction();
+                                        trans.replace(R.id.profile_main, selectedTestChoiceFragment);
+                                        navigationView.setCheckedItem(R.id.nav_test);
+                                        trans.commit();
                                     }
                                 });
                             }

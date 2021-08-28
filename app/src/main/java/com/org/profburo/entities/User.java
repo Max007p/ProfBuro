@@ -2,17 +2,37 @@ package com.org.profburo.entities;
 
 import com.org.profburo.network.responsesEntities.login.LoginResponse;
 
+import java.util.Date;
+
 public class User {
     private Integer id;
     private String username;
     private String firstName;
     private String lastName;
+    private String middleName;
+    private String birthday;
     private String email;
     private String password;
     private String permission;
     private String serialPassport;
     private String numberPassport;
     private String dateJoined;
+    private String phone;
+
+    public User(Integer id, String username, String firstName, String lastName, String middleName, String birthday, String email, String password, String permission, String serialPassport, String numberPassport, String phone) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.birthday = birthday;
+        this.email = email;
+        this.password = password;
+        this.permission = permission;
+        this.serialPassport = serialPassport;
+        this.numberPassport = numberPassport;
+        this.phone = phone;
+    }
 
     public User(Integer id, String username, String firstName, String lastName, String email, String password, String permission, String serialPassport, String numberPassport, String dateJoined) {
         this.id = id;
@@ -41,10 +61,34 @@ public class User {
 
     public User(LoginResponse response)
     {
-         this(response.getId(), response.getUsername(), response.getFirstName(), response.getLastName(), response.getEmail(), response.getPassword(), response.getPermission(), response.getSerialPassport(), response.getNumberPassport());
+         this(response.getId(), response.getUsername(), response.getFirstName(), response.getLastName(), response.getMiddleName(), response.getBirthday(), response.getEmail(), response.getPassword(), response.getPermission(), response.getSerialPassport(), response.getNumberPassport(), response.getPhone());
     }
 
     public User() {
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getId() {

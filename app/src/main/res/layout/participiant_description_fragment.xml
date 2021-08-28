@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="550dp"
+    android:padding="30dp"
+    android:background="@drawable/blue_soft_dialog_shape"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Информация"
+            android:fontFamily="@font/rubik_medium"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Полное имя пользоваетля"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Полное имя пользоваетля"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Дата рождения"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Дата рождения"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Серия паспорта"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_passport_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Серия паспорта"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Номер паспорта"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_passport_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Номер паспорта"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Учебное заведение"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_headquarter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Учебное заведение"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Электронная почта"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Электронная почта"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Телефон"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
+            style="@style/linear_subitem_spacing"/>
+
+        <TextView
+            android:id="@+id/user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Телефон"
+            android:fontFamily="@font/rubik_light"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
